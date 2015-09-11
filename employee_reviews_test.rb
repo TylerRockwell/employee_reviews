@@ -40,4 +40,13 @@ class EmployeeReviewsTest < Minitest::Test
     employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 85000)
     assert_equal 85000, employee.salary
   end
+
+  def test_get_department_salary
+    employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
+    employee2 = Employee.new("Lunk", "lunk@example.com", "882-329-3843", 150000)
+    development = Department.new("Development")
+    development << employee
+    development << employee2
+    assert_equal 230000, development.total_salary
+  end
 end
