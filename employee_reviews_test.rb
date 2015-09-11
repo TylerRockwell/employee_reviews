@@ -59,4 +59,10 @@ class EmployeeReviewsTest < Minitest::Test
       employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
       assert employee.satisfactory
     end
+
+    def test_employees_can_get_raises
+      employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
+      employee.give_raise(5000)
+      assert_equal 85000, employee.salary
+    end
 end

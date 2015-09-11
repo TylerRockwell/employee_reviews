@@ -11,5 +11,7 @@ class Employee
     @satisfactory = true
   end
 
-
+  def give_raise(amount)
+    @salary += amount
+  end
 end
