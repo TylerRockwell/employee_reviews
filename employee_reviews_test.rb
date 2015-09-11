@@ -49,4 +49,9 @@ class EmployeeReviewsTest < Minitest::Test
     development << employee2
     assert_equal 230000, development.total_salary
   end
+
+    def test_employees_can_be_reviewed
+      employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
+      assert employee.reviews << "This employee started off great. Not as impressed with her recent performance."
+    end
 end
