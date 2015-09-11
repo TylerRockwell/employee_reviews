@@ -65,4 +65,18 @@ class EmployeeReviewsTest < Minitest::Test
       employee.give_raise(5000)
       assert_equal 85000, employee.salary
     end
+
+    def test_whole_departments_can_get_raises
+      employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
+      employee2 = Employee.new("Lunk", "lunk@example.com", "882-329-3843", 150000)
+      employee3 = Employee.new("Sanic", "sanic@example.com" "333-444-5555", 20000)
+      development = Department.new("Development")
+      development << employee
+      development << employee2
+
+      development.give_raise(30000)
+      assert_equal 95000, employee.salary
+      assert_equal 165000, employee2.salary
+      assert_equal 20000, employee3.salary
+    end
 end
