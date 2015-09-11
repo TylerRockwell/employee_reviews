@@ -54,4 +54,9 @@ class EmployeeReviewsTest < Minitest::Test
       employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
       assert employee.reviews << "This employee started off great. Not as impressed with her recent performance."
     end
+
+    def test_employees_should_have_performance_metric
+      employee = Employee.new("Joanna", "jdark@example.com", "515-888-4821", 80000)
+      assert employee.satisfactory
+    end
 end
