@@ -1,7 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './employee_reviews'
-
+require 'byebug'
 class EmployeeReviewsTest < Minitest::Test
 
   def test_create_new_department
@@ -70,8 +70,9 @@ class EmployeeReviewsTest < Minitest::Test
       development = Department.new("Development")
       development << employee
       development << employee2
-
-      development.give_raise(30000)
+      development.give_raise(30000) do |employee|
+        true
+      end
       assert_equal 95000, employee.salary
       assert_equal 165000, employee2.salary
       assert_equal 20000, employee3.salary
@@ -85,8 +86,23 @@ class EmployeeReviewsTest < Minitest::Test
       development << employee2
       employee2.satisfactory = false
 
-      development.give_raise(10000)
+      development.give_raise(10000) do |employee|
+        employee.satisfactory == true
+      end
       assert_equal 90000, employee.salary
+      assert_equal 150000, employee2.salary
+    end
+
+    def test_set_criteria_for_employee_raises
+      employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+      employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+      development = Department.new("Development")
+      development << employee
+      development << employee2
+      development.give_raise(20000) do |employee|
+        employee.salary < 100000
+      end
+      assert_equal 100000, employee.salary
       assert_equal 150000, employee2.salary
     end
 end
