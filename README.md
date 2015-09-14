@@ -10,6 +10,7 @@
 * Give raises individually or by department
 * Allows for custom criteria for raises
 * Full test suite for all above features
+* NEW - Save Employee and Department objects to file
 
 ### Included files
 
