@@ -25,7 +25,7 @@ class Department
 
   def save_to_file
     output = File.open("./department_output.txt", "a")
-    output << "#{@name} #{@employees}\n"
+    output << "#{@name},#{@employees}\n"
     output.close
   end
 end

@@ -35,8 +35,19 @@ class Employee
 
   def save_to_file
     output = File.open("./employee_output.txt", "a")
-    output << "#{@name} #{@email} #{@phone} #{@salary} #{@reviews} #{@satisfaction}\n"
+    output << "#{@name},#{@email},#{@phone},#{@salary},#{@reviews},#{@satisfaction}\n"
 
     output.close
+  end
+
+  def open(file_name)
+    input = File.open("./#{file_name}", "r")
+    fields = input.readline.split(",")
+    @name = fields[0]
+    @email = fields[1]
+    @phone = fields[2]
+    @salary = fields[3].to_i
+    @reviews = fields[4]
+    @satisfaction = fields[5].to_i
   end
 end

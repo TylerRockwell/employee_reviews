@@ -23,3 +23,4 @@
 
 * NLP accuracy is low
 * Does not include input validation
+* Does not import saved objects from file
