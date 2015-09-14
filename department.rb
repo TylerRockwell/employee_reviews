@@ -22,4 +22,10 @@ class Department
     ind_amount = total_amount / getting_raise.length
     getting_raise.each {|employee| employee.salary += ind_amount}
   end
+
+  def save_to_file
+    output = File.open("./department_output.txt", "a")
+    output << "#{@name} #{@employees}\n"
+    output.close
+  end
 end

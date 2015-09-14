@@ -32,4 +32,11 @@ class Employee
 
     @satisfaction = total_good_terms.length - total_bad_terms.length
   end
+
+  def save_to_file
+    output = File.open("./employee_output.txt", "a")
+    output << "#{@name} #{@email} #{@phone} #{@salary} #{@reviews} #{@satisfaction}\n"
+
+    output.close
+  end
 end

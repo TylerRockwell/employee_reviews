@@ -144,5 +144,24 @@ class EmployeeReviewsTest < Minitest::Test
       assert employee4.satisfaction > 0
 
     end
+    def test_employees_can_be_saved
+      employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+      employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+
+      employee.save_to_file
+      employee2.save_to_file
+      refute File.zero?("employee_output.txt")
+    end
+
+    def test_department_can_be_saved
+      employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
+      employee2 = Employee.new( name: "Lunk", email: "lunk@example.com", phone: "882-329-3843", salary: 150000)
+      development = Department.new("Development")
+      development << employee
+      development << employee2
+
+      development.save_to_file
+      refute File.zero?("department_output.txt")
+    end
 
 end
