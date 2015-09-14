@@ -54,7 +54,7 @@ class EmployeeReviewsTest < Minitest::Test
 
     def test_employees_should_have_performance_metric
       employee = Employee.new( name: "Joanna", email: "jdark@example.com", phone: "515-888-4821", salary: 80000)
-      assert employee.satisfactory
+      assert employee.satisfaction
     end
 
     def test_employees_can_get_raises
@@ -84,10 +84,10 @@ class EmployeeReviewsTest < Minitest::Test
       development = Department.new("Development")
       development << employee
       development << employee2
-      employee2.satisfactory = false
+      employee.satisfaction += 1
 
       development.give_raise(10000) do |employee|
-        employee.satisfactory == true
+        employee.satisfaction > 0
       end
       assert_equal 90000, employee.salary
       assert_equal 150000, employee2.salary
@@ -139,10 +139,11 @@ class EmployeeReviewsTest < Minitest::Test
       employee3.assess_performance
       employee4.assess_performance
 
-      assert_equal false, employee.satisfactory
-      assert_equal true, employee2.satisfactory
-      assert_equal false, employee3.satisfactory
-      assert_equal true, employee4.satisfactory
+      assert employee.satisfaction < 0
+      assert employee2.satisfaction > 0
+      assert employee3.satisfaction < 0
+      assert employee4.satisfaction > 0
+
     end
 
 end
